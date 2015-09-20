@@ -1,7 +1,7 @@
 {
   "appSettings": {
     "API": {
-      "HOST" : "http://example.com/api"
+      "HOST" : "/api"
     },
     "FACEBOOK": {
       "APP_ID": ""
