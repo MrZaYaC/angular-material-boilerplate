@@ -1,0 +1,45 @@
+.profile-header-wrap {
+  background: url("/img/profile/material-background.jpg") no-repeat;
+  background-size: cover;
+  padding: 30px;
+  @media all {
+    @media (min-width: 600px) {
+      padding: 50px 30px 30px;
+    }
+  }
+  .profile-info {
+    .avatar {
+      display: inline-block;
+      border: 1px solid #fff;
+      border-radius: 50%;
+      overflow: hidden;
+      width: 100px;
+      height: 100px;
+      img {
+        width: 100px;
+        height: 100px;
+        display: block;
+      }
+    }
+    .info {
+      padding: 1rem 0;
+      color: #fff;
+      @media all {
+        @media (min-width: 600px){
+          padding: 0 1rem;
+        }
+      }
+      .name {
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+      .location {
+        padding-top: 1rem;
+        md-icon {
+          margin: 0;
+          color: #fff;
+        }
+      }
+    }
+  }
+}

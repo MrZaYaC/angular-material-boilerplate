@@ -1,0 +1,54 @@
+{
+  "MAIN": {
+    "BRAND": "Angular Boilerplate",
+    "SIGN_IN": "Login",
+    "SIGN_UP": "Sign up",
+    "EMAIL": "Email",
+    "LOGIN": "Email",
+    "PASSWORD": "Password",
+    "CONFIRM_PASSWORD": "Confirm Password",
+    "REMEMBER_ME": "Remember me",
+    "PROFILE": "Profile",
+    "LOGOUT": "Logout"
+  },
+  "MESSAGES": {
+    "INVALID_CREDENTIALS": "Invalid username or password"
+  },
+  "SIGN_PAGE": {
+    "LOGIN_WITH": "or login with",
+    "REGISTRATION": "Sign up",
+    "REGISTER": "Sign up",
+    "ERROR": {
+      "LOGIN": "Please enter correct email address",
+      "LOGIN_EXIST": "User with this email exist",
+      "CONFIRM_PASSWORD": "Passwords do not match"
+    }
+  },
+  "FORM": {
+    "ERROR": {
+      "REQUIRED": "This field is required"
+    },
+    "BTN": {
+      "SAVE": "Save"
+    }
+  },
+  "PROFILE": {
+    "PROFILE": "Profile",
+    "PASSWORD": "Password",
+    "LABELS": {
+      "FNAME": "First Name",
+      "LNAME": "Last Name",
+      "GENDER": "Gender",
+      "BIRTHDAY": "Birthday",
+      "COUNTRY": "Country",
+      "CITY": "City",
+      "ADDRESS": "Address",
+      "ZIP": "Post code",
+      "WEBSITE": "Website",
+      "MALE": "Male",
+      "FEMALE": "Female",
+      "BIRTHDAY_PLACEHOLDER": "mm/dd/yyyy"
+    }
+  }
+
+}

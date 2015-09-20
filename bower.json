@@ -1,0 +1,22 @@
+{
+  "name": "Shabashka frontend",
+  "version": "0.0.1",
+  "dependencies": {
+    "angular": "~1.4.x",
+    "angular-cookies": "~1.4.x",
+    "angular-facebook": "~0.2.3",
+    "angular-google-plus": "~0.1.3",
+    "angular-material": "~0.11.0",
+    "angular-messages": "~1.4.x",
+    "angular-sanitize": "~1.4.1",
+    "angular-translate": "~2.7.2",
+    "angular-translate-loader-static-files": "~2.7.2",
+    "angular-translate-storage-cookie": "~2.7.2",
+    "angular-translate-storage-local": "~2.7.2",
+    "angular-ui-router": "^0.2.15"
+  },
+  "overrides": {},
+  "resolutions": {
+    "angular": "~1.4.x"
+  }
+}

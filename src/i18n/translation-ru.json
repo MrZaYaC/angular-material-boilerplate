@@ -1,0 +1,56 @@
+{
+  "MAIN": {
+    "BRAND": "Angular Boilerplate",
+    "SIGN_IN": "Войти на сайт",
+    "SIGN_UP": "Регистрация",
+    "EMAIL": "Email",
+    "LOGIN": "Телефон или email",
+    "PASSWORD": "Пароль",
+    "CONFIRM_PASSWORD": "Повторите пароль",
+    "REMEMBER_ME": "Запомнить меня",
+    "PROFILE": "Профайл",
+    "LOGOUT": "Выйти"
+  },
+  "MESSAGES": {
+    "INVALID_CREDENTIALS": "Пользователь с таким email и паролем не найден"
+  },
+  "SIGN_PAGE": {
+    "LOGIN_WITH": "Или войдите с помощью",
+    "IF_YOU_DONT_HAVE_ACCOUNT": "Если у Вас еще нет аккаунта, нажмите:",
+    "REGISTRATION": "Регистрация",
+    "REGISTER": "Зарегестрироваться",
+    "IF_YOU_HAVE_ACCOUNT": "Если у Вас уже есть аккаунт, нажмите:",
+    "ERROR": {
+      "LOGIN": "Пожалуйста введите павильный email",
+      "LOGIN_EXIST": "Такой пользователь существует в системе",
+      "CONFIRM_PASSWORD": "Пароли не совпадают"
+    }
+  },
+  "FORM": {
+    "ERROR": {
+      "REQUIRED": "Необходимо заполнить поле"
+    },
+    "BTN": {
+      "SAVE": "Сохранить"
+    }
+  },
+  "PROFILE": {
+    "PROFILE": "Профайл",
+    "PASSWORD": "Пароль",
+    "LABELS": {
+      "FNAME": "Имя",
+      "LNAME": "Фамилия",
+      "GENDER": "Пол",
+      "BIRTHDAY": "День рождения",
+      "COUNTRY": "Страна",
+      "CITY": "Город",
+      "ADDRESS": "Адрес",
+      "ZIP": "Индекс",
+      "WEBSITE": "Веб сайт",
+      "MALE": "Мужской",
+      "FEMALE": "Женский",
+      "BIRTHDAY_PLACEHOLDER": "дд.мм.гггг"
+    }
+  }
+
+}

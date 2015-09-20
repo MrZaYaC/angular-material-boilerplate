@@ -1,0 +1,85 @@
+md-toolbar(hide-gt-md="")
+  .md-toolbar-tools
+    md-button.md-icon-button(aria-label="Menu" ng-click="vm.toggleLeftSidebar()")
+      md-icon menu
+    span(flex='')
+    a(ui-sref='app.home' layout='row')
+      img(alt="{{ 'MAIN.BRAND' | translate }}" src="/img/logo.png" width="24" height="24")
+      span &nbsp;
+      span(translate="MAIN.BRAND")
+md-toolbar(hide-md="" hide-sm="")
+  .md-toolbar-tools
+    a(ui-sref='app.home' layout='row')
+      img(alt="{{ 'MAIN.BRAND' | translate }}" src="/img/logo.png" width="24" height="24")
+      span &nbsp;
+      span(translate="MAIN.BRAND")
+    // fill up the space between left and right area
+    span(flex='')
+    md-button(translate="MAIN.SIGN_IN" aria-label="{{'MAIN.SIGN_IN' | translate}}" ng-hide="vm.user.isLogged" ui-sref="app.signIn" ui-sref-active="active")
+    md-button(translate="MAIN.SIGN_UP" aria-label="{{'MAIN.SIGN_UP' | translate}}" ng-hide="vm.user.isLogged" ui-sref="app.signUp" ui-sref-active="active")
+    md-button(translate="MAIN.PROFILE" aria-label="{{'MAIN.PROFILE' | translate}}" ng-hide="!vm.user.isLogged" ui-sref="app.profile" ui-sref-active="active")
+    md-button(translate="MAIN.LOGOUT"  aria-label="{{'MAIN.LOGOUT' | translate}}" ng-hide="!vm.user.isLogged" ng-click="vm.logout()")
+md-sidenav(md-component-id="left-menu" class="md-sidenav-left")
+  md-toolbar
+    .md-toolbar-tools
+      span(flex='')
+      md-button.md-icon-button(aria-label="Close" ng-click="vm.toggleLeftSidebar()")
+        md-icon close
+  md-list
+    md-list-item(aria-label="{{'MAIN.SIGN_IN' | translate}}" ng-hide="vm.user.isLogged" ng-click="vm.go('app.signIn')")
+      p(translate="MAIN.SIGN_IN")
+      md-divider
+    md-list-item(aria-label="{{'MAIN.SIGN_UP' | translate}}" ng-hide="vm.user.isLogged" ng-click="vm.go('app.signUp')")
+      p(translate="MAIN.SIGN_UP")
+      md-divider
+    md-list-item(aria-label="{{'MAIN.PROFILE' | translate}}" ng-hide="!vm.user.isLogged" ng-click="vm.go('app.profile')")
+      p(translate="MAIN.PROFILE")
+      md-divider
+    md-list-item(aria-label="{{'MAIN.LOGOUT' | translate}}" ng-hide="!vm.user.isLogged" ng-click="vm.logout()")
+      p(translate="MAIN.LOGOUT")
+      md-divider
+
+//nav.navbar.navbar-default
+  div.container-fluid
+    div.navbar-header
+      button.navbar-toggle(ng-click='vm.isCollapsed=!vm.isCollapsed')
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      a.navbar-brand(ui-sref="orders")
+        img(alt="{{ 'MAIN.BRAND' | translate }}" src="/img/logo.png" width="20" height="20")
+      a.navbar-brand(ui-sref="orders" translate="MAIN.BRAND")
+    nav.navbar-collapse.bs-navbar-collapse(collapse="vm.isCollapsed")
+      ul.nav.navbar-nav
+        li(ui-sref-active="active")
+          a(ui-sref='orders')
+            span.glyphicon.glyphicon-list-alt(aria-hidden="true")
+            |&nbsp;
+            span(translate="HEADER.ORDER")
+        li(ui-sref-active="active")
+          a(ui-sref="executors")
+            span.glyphicon.glyphicon-wrench(aria-hidden="true")
+            |&nbsp;
+            span(translate="HEADER.EXECUTORS")
+      ul.nav.navbar-nav.navbar-right(ng-hide="vm.user.isLogged")
+        li(ui-sref-active="active")
+          a(ui-sref="signUp")
+            span.glyphicon.glyphicon-off(aria-hidden="true")
+            |&nbsp;
+            span(translate="MAIN.SIGN_UP")
+        li(ui-sref-active="active")
+          a(ui-sref="signIn")
+            span.glyphicon.glyphicon-log-in(aria-hidden="true")
+            |&nbsp;
+            span(translate="MAIN.SIGN_IN")
+      ul.nav.navbar-nav.navbar-right(ng-show="vm.user.isLogged")
+        li(ui-sref-active="active")
+          a(ui-sref="profile")
+            span.glyphicon.glyphicon-user(aria-hidden="true")
+            |&nbsp;
+            span(translate="MAIN.PROFILE")
+        li(ng-click="vm.logout()")
+          a(href="#")
+            span.glyphicon.glyphicon-log-out(aria-hidden="true")
+            |&nbsp;
+            span(translate="MAIN.LOGOUT")

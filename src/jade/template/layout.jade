@@ -1,0 +1,19 @@
+﻿//- main-layout.jade
+doctype html
+html(xmlns:ng="http://angularjs.org" id="ng-app" lang="en" ng-app="app")
+  block head
+    include ../include/head
+
+  body(ng-controller="AppController as vm" ng-cloak="")
+    div(layout='column', layout-fill='')
+      block header
+        include ../include/header
+
+        div.main(ui-view)
+          block main-content
+
+      block footer
+          include ../include/footer
+
+    block scripts
+        include ../include/scripts

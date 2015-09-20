@@ -1,0 +1,13 @@
+{
+  "appSettings": {
+    "API": {
+      "HOST" : "http://example.com/api"
+    },
+    "FACEBOOK": {
+      "APP_ID": ""
+    },
+    "GOOGLE": {
+      "CLIENT_ID": ""
+    }
+  }
+}

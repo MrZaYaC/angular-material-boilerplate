@@ -1,0 +1,25 @@
+div(layout="row")
+  div(flex-sm="80" offset-sm="10" flex-md="60" offset-md="20" flex="33" offset="33" style="margin-top: 32px;")
+    md-content(layout-padding)
+      form(name="vm.signInForm" novalidate)
+        md-input-container
+          label(translate="MAIN.EMAIL")
+          input(type="text" ng-model='vm.user.login' name="login" login required)
+        md-input-container
+          label(translate="MAIN.PASSWORD")
+          input(type="password" ng-model='vm.user.password' name="password" required)
+        md-input-container
+          div(layout layout-align="center")
+            md-checkbox(ng-model="vm.user.rememberMe" aria-label="{{ 'MAIN.REMEMBER_ME' | translate }}")
+              span(translate="MAIN.REMEMBER_ME")
+        div(layout layout-align="center")
+          md-button.md-raised.md-primary(translate="MAIN.SIGN_IN" ng-click='vm.signIn()' aria-label="{{ 'MAIN.SIGN_IN' | translate }}")
+    md-content(layout-padding)
+      md-divider
+      div(layout="column" flex layout-align="center center")
+        h5(translate="SIGN_PAGE.LOGIN_WITH")
+        div(layout="row" flex layout-align="space-between center")
+          md-button.md-fab.facebook(md-theme="social" aria-label="facebook" ng-click="vm.facebook()")
+            md-icon.fa.fa-facebook
+          md-button.md-fab.google(md-theme="social" aria-label="google" ng-click="vm.google()")
+            md-icon.fa.fa-google
