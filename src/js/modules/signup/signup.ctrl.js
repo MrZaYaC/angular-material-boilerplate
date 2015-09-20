@@ -2,8 +2,8 @@
   'use strict';
   angular.module('app').controller('SignUpController', SignUpController);
 
-  SignUpController.$inject = ['signUpFormModel', '$state', '$mdToast'];
-  function SignUpController(signUpFormModel, $state, $mdToast) {
+  SignUpController.$inject = ['signUpFormModel', '$state', '$mdToast', '$filter'];
+  function SignUpController(signUpFormModel, $state, $mdToast, $filter) {
     var vm = this;
 
     vm.user = signUpFormModel;

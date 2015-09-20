@@ -4,7 +4,7 @@
 
   AuthService.$inject = ['$http', 'appSettings'];
   function AuthService($http, appSettings) {
-    var apiUrl = appSettings.API.HOST + '/auth/';
+    var apiUrl = appSettings.API.HOST + '/auth';
     var ip = null;
     ipLookup();
     return {
@@ -29,10 +29,10 @@
       return $http.delete(apiUrl);
     }
     function facebook(accessToken) {
-      return $http.get(apiUrl + 'facebook/' + '?access_token=' + accessToken + (ip ? '&ip=' +  encodeURIComponent(ip) : ''));
+      return $http.get(apiUrl + '/facebook' + '?access_token=' + accessToken + (ip ? '&ip=' +  encodeURIComponent(ip) : ''));
     }
     function google(accessToken) {
-      return $http.get(apiUrl + 'google/' + '?access_token=' + accessToken + (ip ? '&ip=' +  encodeURIComponent(ip) : ''));
+      return $http.get(apiUrl + '/google' + '?access_token=' + accessToken + (ip ? '&ip=' +  encodeURIComponent(ip) : ''));
     }
     function ipLookup() {
       $http.get('http://ipinfo.io/json').success(function (data) {
