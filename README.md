@@ -2,6 +2,7 @@
 
 ## Demo
 
+http://angular-material-boilerplate.bunny-cloud.com/
 
 ## Development
 
