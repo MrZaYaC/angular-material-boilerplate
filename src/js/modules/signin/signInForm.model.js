@@ -3,6 +3,8 @@
   angular.module('app').factory('signInFormModel', signInFormModel);
   signInFormModel.$inject = ['AuthService', 'User', '$window', '$q', 'Facebook', 'GooglePlus'];
   function signInFormModel(AuthService, User, $window, $q, Facebook, GooglePlus) {
+    var fbLoginStatus = '';
+    var fbAccessToken = '';
     var form = {
       login: '',
       password: '',
@@ -11,6 +13,11 @@
       facebook: facebook,
       google: google
     };
+    Facebook.getLoginStatus(function(response) {
+      fbLoginStatus = response.status;
+      if(fbLoginStatus == 'connected')
+        fbAccessToken = response.authResponse.accessToken;
+    });
     return form;
 
     function signIn() {
@@ -29,8 +36,17 @@
     }
     function facebook() {
       var def = $q.defer();
-      Facebook.getLoginStatus(function(response) {
-        if(response.status == 'connected'){
+      if(fbLoginStatus == 'connected'){
+        AuthService.facebook(fbAccessToken).success(function (data) {
+          $window.localStorage.token = data.token;
+          User.me(data.token).then(function(){
+            def.resolve();
+          });
+        }).error(function (err) {
+          def.reject(err);
+        });
+      } else {
+        Facebook.login(function (response) {
           AuthService.facebook(response.authResponse.accessToken).success(function (data) {
             $window.localStorage.token = data.token;
             User.me(data.token).then(function(){
@@ -39,19 +55,8 @@
           }).error(function (err) {
             def.reject(err);
           });
-        } else {
-          Facebook.login(function (responce) {
-            AuthService.facebook(response.authResponse.accessToken).success(function (data) {
-              $window.localStorage.token = data.token;
-              User.me(data.token).then(function(){
-                def.resolve();
-              });
-            }).error(function (err) {
-              def.reject(err);
-            });
-          }, {scope: 'email, public_profile'});
-        }
-      });
+        }, {scope: 'email, public_profile'});
+      }
       return def.promise;
     }
     function google() {
