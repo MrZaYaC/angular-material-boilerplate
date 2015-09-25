@@ -19,16 +19,17 @@ var mainBowerFiles= require('main-bower-files');
 var jshint        = require('gulp-jshint');
 
 dev_path = {
-  jade: './src/jade/pages/**/*.jade',
+  index: './src/app/index.jade',
+  jade: './src/app/*/**/*.jade',
   images: './src/img/**',
-  js: './src/js/',
+  js: './src/app/**/*.js',
   less: './src/less/styles.less',
   i18n: './src/i18n/*.json',
   config: './src/config/dev.json'
 };
 
 pub_path = {
-  html: './public/',
+  html: './public/view/',
   images: './public/img/',
   js: './public/js/',
   css: './public/css/',
@@ -38,55 +39,66 @@ pub_path = {
 };
 
 gulp.task('jade', ['bower_js', 'bower_css'], function(){
-  gulp.src(dev_path.jade)
+  gulp.src(dev_path.index)
       .pipe(jade({pretty: true}))
       .pipe(inject(gulp.src([pub_path.assets + '*.js', pub_path.assets + '*.css'], {read: false}), {
-          name: 'bower',
-          transform: function(filepath) {
-              if (filepath.slice(-3) === '.js') {
-                  var tmp = filepath.split('/');
-                  var filename = tmp[tmp.length - 1];
-                  return '<script src="/assets/'+ filename + '"></script>';
-              }
-              if (filepath.slice(-4) === '.css') {
-                  var tmp = filepath.split('/');
-                  var filename = tmp[tmp.length - 1];
-                  return '<link rel="stylesheet" href="/assets/'+ filename + '">';
-              }
-
-              // Use the default transform as fallback:
-              return inject.transform.apply(inject.transform, arguments);
+        name: 'bower',
+        transform: function(filepath) {
+          if (filepath.slice(-3) === '.js') {
+            var tmp = filepath.split('/');
+            var filename = tmp[tmp.length - 1];
+            return '<script src="/assets/'+ filename + '"></script>';
           }
+          if (filepath.slice(-4) === '.css') {
+            var tmp = filepath.split('/');
+            var filename = tmp[tmp.length - 1];
+            return '<link rel="stylesheet" href="/assets/'+ filename + '">';
+          }
+
+          // Use the default transform as fallback:
+          return inject.transform.apply(inject.transform, arguments);
+        }
       }))
+      .pipe(jade({pretty: true}))
       .pipe(minifyHTML())
-      .pipe(gulp.dest(pub_path.html))
+      .pipe(gulp.dest('./public/'));
+
+  gulp.src(dev_path.jade)
+      .pipe(jade({pretty: true}))
+      .pipe(minifyHTML())
+      .pipe(gulp.dest(pub_path.html));
 });
 
 gulp.task('jade_dev', ['bower'], function(){
-    gulp.src(dev_path.jade)
-        .pipe(jade({pretty: true}))
-        .pipe(inject(gulp.src(mainBowerFiles(), {read: false}), {
-            name: 'bower',
-            transform: function(filepath) {
-                if (filepath.slice(-3) === '.js') {
-                    return '<script src="/assets/'+ filepath.replace('/bower_components/', '') + '"></script>';
-                }
-                if (filepath.slice(-4) === '.css') {
-                    return '<link rel="stylesheet" href="/assets/'+ filepath.replace('/bower_components/', '') + '">';
-                }
+  gulp.src(dev_path.index)
+      .pipe(jade({pretty: true}))
+      .pipe(inject(gulp.src(mainBowerFiles(), {read: false}), {
+        name: 'bower',
+        transform: function(filepath) {
+          if (filepath.slice(-3) === '.js') {
+            return '<script src="/assets/'+ filepath.replace('/bower_components/', '') + '"></script>';
+          }
+          if (filepath.slice(-4) === '.css') {
+            return '<link rel="stylesheet" href="/assets/'+ filepath.replace('/bower_components/', '') + '">';
+          }
 
-                // Use the default transform as fallback:
-                return inject.transform.apply(inject.transform, arguments);
-            }
-        }))
-        .pipe(minifyHTML())
-        .pipe(gulp.dest(pub_path.html))
+          // Use the default transform as fallback:
+          return inject.transform.apply(inject.transform, arguments);
+        }
+      }))
+      .pipe(minifyHTML())
+      .pipe(gulp.dest('./public/'));
+
+  gulp.src(dev_path.jade)
+      .pipe(jade({pretty: true}))
+      .pipe(minifyHTML())
+      .pipe(gulp.dest(pub_path.html));
 });
 
 gulp.task('bower', function (){
-    return gulp.src('./bower.json')
-        .pipe(bowerFiles())
-        .pipe(gulp.dest(pub_path.assets));
+  return gulp.src('./bower.json')
+      .pipe(bowerFiles())
+      .pipe(gulp.dest(pub_path.assets));
 });
 
 gulp.task('images', function() {
@@ -99,7 +111,7 @@ gulp.task('js_dev', function () {
   var config = gulp.src(dev_path.config)
       .pipe(ngConstant({name: 'app.config'}));
 
-  var scripts = gulp.src(dev_path.js + '**/*.js');
+  var scripts = gulp.src(dev_path.js);
 
   scripts.pipe(jshint())
       .pipe(jshint.reporter('jshint-stylish'));
@@ -116,7 +128,7 @@ gulp.task('js_pub', function () {
   var config = gulp.src(pub_path.config)
       .pipe(ngConstant({name: 'app.config'}));
 
-  var scripts = gulp.src(dev_path.js + '**/*.js');
+  var scripts = gulp.src(dev_path.js);
 
   return es.merge(config, scripts)
       .pipe(concat('app.min.js'))
@@ -164,7 +176,7 @@ gulp.task('less', function () {
 
 gulp.task('watch', ['webserver'], function () {
   gulp.watch('./src/img/**', ['images']);
-  gulp.watch('./src/jade/**', ['jade_dev']);
+  gulp.watch(dev_path.jade, ['jade_dev']);
   gulp.watch('./bower_components/**', ['jade_dev']);
   gulp.watch('./src/js/**', ['js_dev']);
   gulp.watch('./src/config/*.json', ['js_dev']);

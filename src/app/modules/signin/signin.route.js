@@ -6,7 +6,7 @@
   function signInRoute($stateProvider) {
     $stateProvider.state('app.signIn', {
       url: '/sign-in',
-      templateUrl: '/view/signIn.html',
+      templateUrl: '/view/modules/signin/signIn.html',
       controller: 'SignInController',
       controllerAs: 'vm',
       data: {

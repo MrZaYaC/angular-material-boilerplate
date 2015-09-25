@@ -15,6 +15,7 @@
   "author": "Denis Zaichenko",
   "license": "GPL",
   "devDependencies": {
+    "gulp-autoprefixer": "^3.0.2",
     "gulp-webserver": "^0.9.1"
   },
   "dependencies": {

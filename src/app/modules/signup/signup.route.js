@@ -6,7 +6,7 @@
   function signUpRoute($stateProvider) {
     $stateProvider.state('app.signUp', {
       url: '/sign-up',
-      templateUrl: '/view/signUp.html',
+      templateUrl: '/view/modules/signup/signUp.html',
       controller: 'SignUpController',
       controllerAs: 'vm',
       data: {

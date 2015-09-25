@@ -6,7 +6,7 @@
   function homeRoute($stateProvider) {
     $stateProvider.state('app.home', {
       url: '/',
-      templateUrl: '/view/home.html',
+      templateUrl: '/view/modules/home/home.html',
       controller: 'HomeController',
       controllerAs: 'vm',
       data: {
