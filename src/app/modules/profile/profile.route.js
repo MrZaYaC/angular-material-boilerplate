@@ -8,7 +8,7 @@
       url: '/profile',
       templateUrl: '/view/modules/profile/profile.html',
       controller: 'ProfileController',
-      controllerAs: 'vm',
+      controllerAs: 'profile',
       data: {
         title: 'MAIN.PROFILE',
         isLogged: true

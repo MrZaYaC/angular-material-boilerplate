@@ -38,38 +38,62 @@ pub_path = {
   config: './src/config/prod.json'
 };
 
-gulp.task('jade', ['bower_js', 'bower_css'], function(){
+gulp.task('dev',['watch']);
+gulp.task('pub',['less', 'jade', 'images', 'js_pub', 'i18n']);
+
+gulp.task('jade', ['bower_js', 'bower_css'], jadeTask);
+gulp.task('jade_dev', ['bower'], jadeDevTask);
+gulp.task('bower', bowerTask);
+gulp.task('images', imagesTask);
+gulp.task('js_dev', jsDevTask);
+gulp.task('js_pub', jsPubTask);
+gulp.task('bower_js', bowerJsTask);
+gulp.task('bower_css', bowerCssTask);
+gulp.task('webserver', ['less', 'jade_dev', 'images', 'js_dev', 'i18n'] , webServerTask);
+gulp.task('less', lessTask);
+gulp.task('i18n', i18nTask);
+
+gulp.task('watch', ['webserver'], function () {
+  gulp.watch('./src/img/**', ['images']);
+  gulp.watch('./src/**/*.jade', ['jade_dev']);
+  gulp.watch('./bower_components/**', ['jade_dev']);
+  gulp.watch('./src/js/**', ['js_dev']);
+  gulp.watch('./src/config/*.json', ['js_dev']);
+  gulp.watch('./src/less/**', ['less']);
+  gulp.watch('./src/i18n/**', ['i18n']);
+});
+
+function jadeTask () {
   gulp.src(dev_path.index)
       .pipe(jade({pretty: true}))
       .pipe(inject(gulp.src([pub_path.assets + '*.js', pub_path.assets + '*.css'], {read: false}), {
         name: 'bower',
-        transform: function(filepath) {
+        transform: function (filepath) {
           if (filepath.slice(-3) === '.js') {
             var tmp = filepath.split('/');
             var filename = tmp[tmp.length - 1];
-            return '<script src="/assets/'+ filename + '"></script>';
+            return '<script src="/assets/' + filename + '"></script>';
           }
           if (filepath.slice(-4) === '.css') {
             var tmp = filepath.split('/');
             var filename = tmp[tmp.length - 1];
-            return '<link rel="stylesheet" href="/assets/'+ filename + '">';
+            return '<link rel="stylesheet" href="/assets/' + filename + '">';
           }
 
           // Use the default transform as fallback:
           return inject.transform.apply(inject.transform, arguments);
         }
       }))
-      .pipe(jade({pretty: true}))
       .pipe(minifyHTML())
       .pipe(gulp.dest('./public/'));
 
-  gulp.src(dev_path.jade)
+  return gulp.src(dev_path.jade)
       .pipe(jade({pretty: true}))
       .pipe(minifyHTML())
       .pipe(gulp.dest(pub_path.html));
-});
+}
 
-gulp.task('jade_dev', ['bower'], function(){
+function jadeDevTask () {
   gulp.src(dev_path.index)
       .pipe(jade({pretty: true}))
       .pipe(inject(gulp.src(mainBowerFiles(), {read: false}), {
@@ -89,25 +113,25 @@ gulp.task('jade_dev', ['bower'], function(){
       .pipe(minifyHTML())
       .pipe(gulp.dest('./public/'));
 
-  gulp.src(dev_path.jade)
+  return gulp.src(dev_path.jade)
       .pipe(jade({pretty: true}))
       .pipe(minifyHTML())
       .pipe(gulp.dest(pub_path.html));
-});
+}
 
-gulp.task('bower', function (){
+function bowerTask () {
   return gulp.src('./bower.json')
       .pipe(bowerFiles())
       .pipe(gulp.dest(pub_path.assets));
-});
+}
 
-gulp.task('images', function() {
+function imagesTask () {
   return gulp.src(dev_path.images)
       .pipe(imagemin())
       .pipe(gulp.dest(pub_path.images))
-});
+}
 
-gulp.task('js_dev', function () {
+function jsDevTask () {
   var config = gulp.src(dev_path.config)
       .pipe(ngConstant({name: 'app.config'}));
 
@@ -123,8 +147,9 @@ gulp.task('js_dev', function () {
       .pipe(uglify())
       .pipe(sourcemaps.write())
       .pipe(gulp.dest(pub_path.js))
-});
-gulp.task('js_pub', function () {
+}
+
+function jsPubTask () {
   var config = gulp.src(pub_path.config)
       .pipe(ngConstant({name: 'app.config'}));
 
@@ -135,8 +160,9 @@ gulp.task('js_pub', function () {
       .pipe(ngAnnotate())
       .pipe(uglify())
       .pipe(gulp.dest(pub_path.js))
-});
-gulp.task('bower_js', function (){
+}
+
+function bowerJsTask () {
   var filterJS = gulpFilter('**/*.js');
   return gulp.src('./bower.json')
       .pipe(bowerFiles())
@@ -145,9 +171,9 @@ gulp.task('bower_js', function (){
       .pipe(ngAnnotate())
       .pipe(uglify())
       .pipe(gulp.dest(pub_path.assets));
-});
+}
 
-gulp.task('bower_css', function (){
+function bowerCssTask () {
   var filterCSS = gulpFilter('**/*.css');
   return gulp.src('./bower.json')
       .pipe(bowerFiles())
@@ -155,39 +181,26 @@ gulp.task('bower_css', function (){
       .pipe(concat('vendors.min.css'))
       .pipe(minifyCss())
       .pipe(gulp.dest(pub_path.assets));
-});
+}
 
-gulp.task('webserver', ['less', 'jade_dev', 'images', 'js_dev', 'i18n'] , function() {
+function webServerTask () {
   gulp.src('public')
       .pipe(webserver({
         livereload: true,
         open: true,
         fallback: 'index.html'
       }));
-});
+}
 
-gulp.task('less', function () {
+function lessTask () {
   return gulp.src(dev_path.less)
       .pipe(less({
         paths: [ path.join(__dirname, 'less', 'includes') ]
       }))
       .pipe(gulp.dest(pub_path.css));
-});
+}
 
-gulp.task('watch', ['webserver'], function () {
-  gulp.watch('./src/img/**', ['images']);
-  gulp.watch(dev_path.jade, ['jade_dev']);
-  gulp.watch('./bower_components/**', ['jade_dev']);
-  gulp.watch('./src/js/**', ['js_dev']);
-  gulp.watch('./src/config/*.json', ['js_dev']);
-  gulp.watch('./src/less/**', ['less']);
-  gulp.watch('./src/i18n/**', ['i18n']);
-});
-
-gulp.task('i18n', function() {
+function i18nTask () {
   return gulp.src(dev_path.i18n)
       .pipe(gulp.dest(pub_path.i18n));
-});
-
-gulp.task('dev',['watch']);
-gulp.task('pub',['less', 'jade', 'images', 'js_pub', 'i18n']);
+}

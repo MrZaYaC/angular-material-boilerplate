@@ -1,44 +1,11 @@
-//.container-fluid
-//  .row
-//    .col-sm-6.col-sm-offset-3
-//      .h3(translate="SIGN_PAGE.REGISTRATION")
-//      .well
-//        form.form-horizontal(name="vm.signUpForm" novalidate)
-//          .form-group(ng-class="{ 'has-error': vm.signUpForm.login.$error.login || vm.signUpForm.login.$error.loginExist, 'has-success': vm.signUpForm.login.$valid }")
-//            label.col-sm-4.control-label(for="login" translate="MAIN.LOGIN")
-//            .col-sm-8
-//              input#login.form-control(type="text" placeholder="{{ 'MAIN.LOGIN' | translate }}" name='login' ng-model="vm.user.login" ng-model-options="{ updateOn: 'blur' }" required login login-exist)
-//              .text-danger(ng-show='vm.signUpForm.login.$error.login' translate='SIGN_PAGE.ERROR.LOGIN')
-//              .text-danger(ng-show='vm.signUpForm.login.$error.loginExist' translate='SIGN_PAGE.ERROR.LOGIN_EXIST')
-//              .text-danger(ng-show='vm.signUpForm.login.$error.required && vm.signUpForm.login.$touched' translate='FORM.ERROR.REQUIRED')
-//          .form-group(ng-class="{ 'has-error': vm.signUpForm.password.$error.password, 'has-success': vm.signUpForm.password.$valid }")
-//            label.col-sm-4.control-label(for="password" translate="MAIN.PASSWORD")
-//            .col-sm-8
-//              input#password.form-control(type="password" placeholder="{{ 'MAIN.PASSWORD' | translate }}" name='password' ng-model='vm.user.password' ng-model-options="{ updateOn: 'blur' }" password required)
-//              .text-danger(ng-show='vm.signUpForm.password.$error.required && vm.signUpForm.password.$touched' translate='FORM.ERROR.REQUIRED')
-//          .form-group(ng-class="{ 'has-error': vm.signUpForm.confirmPassword.$error.compareTo, 'has-success': vm.signUpForm.confirmPassword.$valid }")
-//            label.col-sm-4.control-label(for="confirm_password" translate="MAIN.CONFIRM_PASSWORD")
-//            .col-sm-8
-//              input#confirm_password.form-control(type="password" placeholder="{{ 'MAIN.CONFIRM_PASSWORD' | translate }}" name="confirmPassword" ng-model="vm.user.confirmPassword" ng-model-options="{ updateOn: 'blur' }" required compare-to="vm.user.password")
-//              .text-danger(ng-show='vm.signUpForm.confirmPassword.$error.compareTo' translate='SIGN_PAGE.ERROR.CONFIRM_PASSWORD')
-//          .form-group
-//            .col-sm-offset-4.col-sm-8
-//              button.btn.btn-default(translate="SIGN_PAGE.REGISTER" ng-click="vm.signUp()")
-//  .row
-//    .col-sm-6.col-sm-offset-3
-//      .well.text-center
-//        span(translate="SIGN_PAGE.IF_YOU_HAVE_ACCOUNT")
-//        br
-//        br
-//        button.btn.btn-primary(ui-sref="app.signIn" translate="MAIN.SIGN_IN")
 div(layout="row")
   div(flex-sm="80" offset-sm="10" flex-md="60" offset-md="20" flex="33" offset="33" style="margin-top: 32px;")
     md-content(layout-padding)
-      form(name="vm.signUpForm" novalidate)
+      form(name="signUp.form" novalidate)
         md-input-container
           label(translate="MAIN.EMAIL")
-          input(type="text" name='login' ng-model="vm.user.login" ng-model-options="{ updateOn: 'blur' }" required login login-exist)
-          div(ng-messages="vm.signUpForm.login.$error" ng-if="vm.signUpForm.login.$dirty")
+          input(type="text" name='login' ng-model="signUp.user.login" ng-model-options="{ updateOn: 'blur' }" required login login-exist)
+          div(ng-messages="signUp.form.login.$error" ng-if="signUp.form.login.$dirty")
             div(ng-message="login")
               span(translate="SIGN_PAGE.ERROR.LOGIN")
             div(ng-message="loginExist")
@@ -47,15 +14,15 @@ div(layout="row")
               span(translate="FORM.ERROR.REQUIRED")
         md-input-container
           label(translate="MAIN.PASSWORD")
-          input(type="password" name='password' ng-model='vm.user.password' ng-model-options="{ updateOn: 'blur' }" password required)
-          div(ng-messages="vm.signUpForm.password.$error" ng-if="vm.signUpForm.password.$dirty")
+          input(type="password" name='password' ng-model='signUp.user.password' ng-model-options="{ updateOn: 'blur' }" password required)
+          div(ng-messages="signUp.form.password.$error" ng-if="signUp.form.password.$dirty")
             div(ng-message="required")
               span(translate="FORM.ERROR.REQUIRED")
         md-input-container
           label(translate="MAIN.CONFIRM_PASSWORD")
-          input(type="password" name="confirmPassword" ng-model="vm.user.confirmPassword" ng-model-options="{ updateOn: 'blur' }" required compare-to="vm.user.password")
-          div(ng-messages="vm.signUpForm.confirmPassword.$error")
+          input(type="password" name="confirmPassword" ng-model="signUp.user.confirmPassword" ng-model-options="{ updateOn: 'blur' }" required compare-to="signUp.user.password")
+          div(ng-messages="signUp.form.confirmPassword.$error")
             div(ng-message="compareTo")
               span(translate='SIGN_PAGE.ERROR.CONFIRM_PASSWORD')
         div(layout layout-align="center")
-          md-button.md-raised.md-primary(translate="SIGN_PAGE.REGISTER" ng-click='vm.signUp()' aria-label="{{ 'SIGN_PAGE.REGISTER' | translate }}")
+          md-button.md-raised.md-primary(translate="SIGN_PAGE.REGISTER" ng-click='signUp.signUp()' aria-label="{{ 'SIGN_PAGE.REGISTER' | translate }}")

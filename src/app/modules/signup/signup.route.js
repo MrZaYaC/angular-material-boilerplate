@@ -8,7 +8,7 @@
       url: '/sign-up',
       templateUrl: '/view/modules/signup/signUp.html',
       controller: 'SignUpController',
-      controllerAs: 'vm',
+      controllerAs: 'signUp',
       data: {
         title: 'MAIN.SIGN_UP',
         isNotLogged: true

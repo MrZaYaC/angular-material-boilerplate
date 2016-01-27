@@ -10,12 +10,12 @@
     vm.signIn = signIn;
     vm.facebook = facebook;
     vm.google = google;
-    vm.signInForm = '';
+    vm.form = '';
 
 
     function signIn() {
       vm.error = false;
-      if(vm.signInForm.$valid) {
+      if(vm.form.$valid) {
         signInFormModel.signIn().then(function() {
           success();
         }, function (error) {

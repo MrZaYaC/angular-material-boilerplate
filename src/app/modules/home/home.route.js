@@ -8,7 +8,7 @@
       url: '/',
       templateUrl: '/view/modules/home/home.html',
       controller: 'HomeController',
-      controllerAs: 'vm',
+      controllerAs: 'home',
       data: {
         title: 'MAIN.BRAND'
       }

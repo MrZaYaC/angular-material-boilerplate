@@ -16,8 +16,6 @@
     $stateProvider.state('app.404', {
           url: '/404',
           templateUrl: '/view/main/404.html',
-          //controller: '404Controller',
-          //controllerAs: 'vm',
           data: {
             title: 'MAIN.BRAND'
           }

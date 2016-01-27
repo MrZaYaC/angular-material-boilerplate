@@ -8,10 +8,10 @@
 
     vm.user = signUpFormModel;
     vm.signUp = signUp;
-    vm.signUpForm = '';
+    vm.form = '';
 
     function signUp() {
-      if(vm.signUpForm.$valid){
+      if(vm.form.$valid){
         signUpFormModel.signUp().then(function() {
           $state.go('app.profile');
         }, function (error) {

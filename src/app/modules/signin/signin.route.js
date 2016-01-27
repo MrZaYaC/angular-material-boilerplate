@@ -8,7 +8,7 @@
       url: '/sign-in',
       templateUrl: '/view/modules/signin/signIn.html',
       controller: 'SignInController',
-      controllerAs: 'vm',
+      controllerAs: 'signIn',
       data: {
         title: 'MAIN.SIGN_IN',
         isNotLogged: true
